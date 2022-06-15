@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>List accounts - Flask</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet'>
+    <link rel="icon" type="image/x-icon" href="static/img/favicon.png">
+    <style>
+        body {
+            font-family: 'Comfortaa';
+            font-size: 22px;
+            margin: auto;
+            display: table-cell;
+            vertical-align: middle;
+            height: 100%;
+        }
+
+        html {
+            height: 100%;
+            display: table;
+            margin: auto;
+        }
+
+        a.btn-primary:link,
+        a.btn-primary:visited {
+            background-color: #069ee1;
+        }
+
+        a.btn-primary:hover {
+            background-color: #0c5cab;
+        }
+
+        td {
+            padding-left: 50px;
+            padding-right: 50px;
+        }
+    </style>
+</head>
+
+<body class="text-center center" style="padding:20px">
+    {% if cursor %}
+    <h1>Listar eventos de reposição</h1>
+    <p class="center">Por favor, especifique a IVM para a qual deseja ver os eventos de reposição:</p>
+    <br>
+    <table style="margin: 0px auto;" class="text-center center table-striped" border="2px">
+        <thead>
+            <tr>
+                <th>Fabricante</th>
+                <th>Número de Série</th>
+                <th>Listar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in cursor %}
+            <tr>
+                <td>{{ record[0] }}</td>
+                <td>{{ record[1] }}</td>
+                <td><a href="list_IVM_specific_event?manuf={{ record[0] }}&serial_nr={{ record[1] }}">Listar eventos</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br><br>
+    <a href="../{{ FILENAME }}/" class="btn btn-primary">Voltar ao ínicio</a>
+    {% else %}
+    <p> Erro: não foi possível obter dados da base de dados!</p>
+    {% endif %}
+</body>
+
+</html>
