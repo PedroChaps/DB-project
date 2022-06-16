@@ -6,20 +6,23 @@ from flask import render_template, request
 import psycopg2
 import psycopg2.extras
 
-## Libs postgres
+# Libs postgres
 import psycopg2
 import psycopg2.extras
 
 app = Flask(__name__, static_url_path='/static')
 
-## SGBD configs
-DB_HOST="db.tecnico.ulisboa.pt"
-DB_USER="ist199298" 
-DB_DATABASE=DB_USER
-DB_PASSWORD="vgod7787"
-DB_CONNECTION_STRING = "host=%s dbname=%s user=%s password=%s" % (DB_HOST, DB_DATABASE, DB_USER, DB_PASSWORD)
+# SGBD configs
+DB_HOST = "db.tecnico.ulisboa.pt"
+DB_USER = "ist199298"
+DB_DATABASE = DB_USER
+DB_PASSWORD = "vgod7787"
+DB_CONNECTION_STRING = "host=%s dbname=%s user=%s password=%s" % (
+    DB_HOST, DB_DATABASE, DB_USER, DB_PASSWORD)
 
 FILENAME = "projetoBD-2021_2022-Entrega3.cgi"
+# ———————————————————————————————————————————————————————————————————————————————————————————————————————
+
 
 
 @app.route("/")
@@ -27,6 +30,10 @@ def index():
     return render_template("index.html", FILENAME=FILENAME)
 
 
+
+
+#                                   Routes related to listing IVM events
+# ———————————————————————————————————————————————————————————————————————————————————————————————————————
 @app.route("/list_IVM_events")
 def list_IVM_events():
     dbConn = None
@@ -52,10 +59,10 @@ def list_IVM_specific_event():
     try:
         dbConn = psycopg2.connect(DB_CONNECTION_STRING)
         cursor = dbConn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-        
+
         manuf = request.form["manuf"]
         serial_nr = request.form["serial_nr"]
-        
+
         # TODO mudar esta query
         query = "UPDATE account SET balance=%s WHERE account_number = %s"
         data = (manuf, serial_nr)
@@ -67,8 +74,13 @@ def list_IVM_specific_event():
         dbConn.commit()
         cursor.close()
         dbConn.close()
+# ———————————————————————————————————————————————————————————————————————————————————————————————————————
 
 
+
+
+#                                   Routes related to updates of retailers
+# ———————————————————————————————————————————————————————————————————————————————————————————————————————
 @app.route("/update_retailers")
 def update_retailers():
     dbConn = None
@@ -87,12 +99,67 @@ def update_retailers():
         dbConn.close()
 
 
+@app.route("/add_retailer")
+def add_retailer():
+    try:
+        return render_template("addRetailer.html")
+    except Exception as e:
+        return str(e)
+
+
+@app.route("/insert_retailer", methods=["POST"])
+def insert_retailer():
+    dbConn = None
+    cursor = None
+    try:
+        dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+        cursor = dbConn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+        tin = request.form["TIN"]
+        name = request.form["name"]
+
+        # TODO perceber o .commit(), visto que não começa a transaction em lado nenhum
+        # TODO mudar esta query de contas para inserir um novo retalhista com tin tin e nome name
+        #query = "UPDATE account SET balance=%s WHERE account_number = %s"
+        #data = (tin, name)
+        #cursor.execute(query, data)
+        return render_template("addRetailer-Success.html", FILENAME=FILENAME)
+
+    except Exception as e:
+        return str(e)
+
+    finally:
+        dbConn.commit()
+        cursor.close()
+        dbConn.close()
 
 
 @app.route("/remove_retailer")
 def remove_retailer():
-    # TODO implementar. Fazer query em SQL em que apago todos os produtos do retailhista, depois o retalhista. Tem que ser uma transação. De alguma forma, usar params=request.args para sacar o TIN do retalhista. Gerar HTML a dizer "o retalhista *nome* com o TIN *TIN* foi removido com sucesso, tais como os seus produtos."
+    # TODO implementar. Fazer query em SQL em que apago todos os produtos do retailhista, depois o retalhista. Parecido ao list_IVM_specific_event(). Tem que ser uma transação. De alguma forma, usar params=request.args para sacar o TIN do retalhista. Gerar HTML a dizer "o retalhista *nome* com o TIN *TIN* foi removido com sucesso, tais como os seus produtos."
     pass
+
+# ———————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+
+
+
+
+#                               Routes related to updates of categories
+# ———————————————————————————————————————————————————————————————————————————————————————————————————————
+# ———————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+
+
+
+
+#                          Routes related to listing sub-categories of a super-categorie
+# ———————————————————————————————————————————————————————————————————————————————————————————————————————
+# ———————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
 
 
 # \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
@@ -165,7 +232,3 @@ def update_balance():
 
 
 CGIHandler().run(app)
-  
-
-
-

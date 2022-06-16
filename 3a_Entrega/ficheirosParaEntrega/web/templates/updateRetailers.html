@@ -59,14 +59,14 @@
             <tr>
                 <td>{{ record[0] }}</td>
                 <td>{{ record[1] }}</td>
-                <td><a href="removeRetalier?TIN={{ record[0] }}" style="color: red;">remover Retalhista</a>
+                <td><a href="remove_retalier?TIN={{ record[0] }}" style="color: red;">remover Retalhista</a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     <br>
-    <a href="addRetalier" class="text-right btn btn-light text-left">adicionar um retalhista</a>
+    <a href="add_retailer" class="text-right btn btn-light text-left">adicionar um retalhista</a>
     <br><br>
     <a href="../{{ FILENAME }}/" class="text-center btn btn-primary">Voltar ao ínicio</a>
     {% else %}
