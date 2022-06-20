@@ -32,19 +32,34 @@ def index():
 
 
 
-#                                   Routes related to listing IVM events
+
+#                               Routes related to updates of categories
 # ———————————————————————————————————————————————————————————————————————————————————————————————————————
-@app.route("/list_IVM_events")
-def list_IVM_events():
+
+
+@app.route("/update_categories")
+def update_categories():
     dbConn = None
     cursor = None
     try:
         dbConn = psycopg2.connect(DB_CONNECTION_STRING)
         cursor = dbConn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-        # TODO mudar esta query de contas para nomes das IVMs
+        
+        
+        # TODO mudar esta query de contas para super-categs e categs dos retalhistas
         query = "SELECT account_number, branch_name, balance FROM account;"
+        
         cursor.execute(query)
-        return render_template("listIVMevents.html", cursor=cursor, FILENAME=FILENAME)
+        rowsSuperCategories = cursor.fetchall()
+        
+        # TODO mudar esta query de contas para super-categs e categs dos retalhistas
+        query = "SELECT account_number, branch_name, balance FROM account;"
+        
+        cursor.execute(query)
+        rowsSubCategories = cursor.fetchall()
+        
+        
+        return render_template("updateCategories.html", rowsSuperCategories=rowsSuperCategories, rowsSubCategories=rowsSubCategories, FILENAME=FILENAME)
     except Exception as e:
         return str(e)
     finally:
@@ -52,30 +67,129 @@ def list_IVM_events():
         dbConn.close()
 
 
-@app.route("/list_IVM_specific_event")
-def list_IVM_specific_event():
+@app.route("/add_subCateg_to_superCateg", methods=["POST"])
+def add_subCateg_to_superCateg():
     dbConn = None
     cursor = None
     try:
         dbConn = psycopg2.connect(DB_CONNECTION_STRING)
         cursor = dbConn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-
-        manuf = request.form["manuf"]
-        serial_nr = request.form["serial_nr"]
+        
+        simpleCategName = request.form["simpleCategName"]
+        superCategName = request.form["superCategName"]
+        
+        
 
         # TODO mudar esta query
-        query = "UPDATE account SET balance=%s WHERE account_number = %s"
-        data = (manuf, serial_nr)
-        cursor.execute(query, data)
-        return render_template("listIVMSpecificEvent.html", cursor=cursor, FILENAME=FILENAME)
+        #query = "UPDATE account SET balance=%s WHERE account_number = %s"
+        #data = (manuf, serial_nr)
+        #cursor.execute(query, data)
+        return render_template("add_subCateg_to_superCateg-Success.html", FILENAME=FILENAME, superCategName=superCategName,simpleCategName=simpleCategName)
     except Exception as e:
         return str(e)
     finally:
         dbConn.commit()
         cursor.close()
         dbConn.close()
-# ———————————————————————————————————————————————————————————————————————————————————————————————————————
 
+
+@app.route("/remove_superCateg")
+def remove_superCateg():
+    dbConn = None
+    cursor = None
+    try:
+        dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+        cursor = dbConn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+        
+        superCategName = request.args["superCategName"]
+
+        # TODO mudar esta query
+        #query = "UPDATE account SET balance=%s WHERE account_number = %s"
+        #data = (manuf, serial_nr)
+        #cursor.execute(query, data)
+        return render_template("removeSuperCateg-Success.html", cursor=cursor, FILENAME=FILENAME, superCategName=superCategName)
+    except Exception as e:
+        return str(e)
+    finally:
+        dbConn.commit()
+        cursor.close()
+        dbConn.close()
+
+
+@app.route("/add_superCateg", methods=["POST"])
+def add_superCateg():
+    dbConn = None
+    cursor = None
+    try:
+        dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+        cursor = dbConn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+        name = request.form["name"]
+
+        # TODO mudar esta query
+        #query = "UPDATE account SET balance=%s WHERE account_number = %s"
+        #data = (tin, name)
+        #cursor.execute(query, data)
+        return render_template("add_superCateg-Success.html", cursor=cursor, FILENAME=FILENAME)
+
+    except Exception as e:
+        return str(e)
+
+    finally:
+        dbConn.commit()
+        cursor.close()
+        dbConn.close()
+
+
+@app.route("/remove_subCateg")
+def remove_subCateg():
+    dbConn = None
+    cursor = None
+    try:
+        dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+        cursor = dbConn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+        
+        subCategName = request.args["subCategName"]
+
+        # TODO mudar esta query
+        #query = "UPDATE account SET balance=%s WHERE account_number = %s"
+        #data = (manuf, serial_nr)
+        #cursor.execute(query, data)
+        return render_template("removeSubCateg-Success.html", cursor=cursor, FILENAME=FILENAME, subCategName=subCategName)
+    except Exception as e:
+        return str(e)
+    finally:
+        dbConn.commit()
+        cursor.close()
+        dbConn.close()
+
+
+
+@app.route("/add_subCateg", methods=["POST"])
+def add_subCateg():
+    dbConn = None
+    cursor = None
+    try:
+        dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+        cursor = dbConn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+        name = request.form["name"]
+    
+        # TODO mudar esta query
+        #query = "UPDATE account SET balance=%s WHERE account_number = %s"
+        #data = (tin, name)
+        #cursor.execute(query, data)
+        return render_template("add_subCateg-Success.html", FILENAME=FILENAME, name=name)
+
+    except Exception as e:
+        return str(e)
+
+    finally:
+        dbConn.commit()
+        cursor.close()
+        dbConn.close()
+
+# ———————————————————————————————————————————————————————————————————————————————————————————————————————
 
 
 
@@ -102,7 +216,7 @@ def update_retailers():
 @app.route("/add_retailer")
 def add_retailer():
     try:
-        return render_template("addRetailer.html")
+        return render_template("addRetailer.html", FILENAME=FILENAME)
     except Exception as e:
         return str(e)
 
@@ -137,18 +251,58 @@ def insert_retailer():
 @app.route("/remove_retailer")
 def remove_retailer():
     # TODO implementar. Fazer query em SQL em que apago todos os produtos do retailhista, depois o retalhista. Parecido ao list_IVM_specific_event(). Tem que ser uma transação. De alguma forma, usar params=request.args para sacar o TIN do retalhista. Gerar HTML a dizer "o retalhista *nome* com o TIN *TIN* foi removido com sucesso, tais como os seus produtos."
-    pass
+    return render_template("removeRetailer-Success.html", FILENAME=FILENAME)
+    
 
 # ———————————————————————————————————————————————————————————————————————————————————————————————————————
 
 
 
 
+#                                   Routes related to listing IVM events
+# ———————————————————————————————————————————————————————————————————————————————————————————————————————
+@app.route("/list_IVM_events")
+def list_IVM_events():
+    dbConn = None
+    cursor = None
+    try:
+        dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+        cursor = dbConn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+        # TODO mudar esta query de contas para nomes das IVMs
+        query = "SELECT account_number, branch_name, balance FROM account;"
+        cursor.execute(query)
+        return render_template("listIVMevents.html", cursor=cursor, FILENAME=FILENAME)
+    except Exception as e:
+        return str(e)
+    finally:
+        cursor.close()
+        dbConn.close()
 
 
-#                               Routes related to updates of categories
+@app.route("/list_IVM_specific_event")
+def list_IVM_specific_event():
+    dbConn = None
+    cursor = None
+    try:
+        dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+        cursor = dbConn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+        
+        manuf = request.args["manuf"]
+        serial_nr = request.args["serial_nr"]
+        
+        # TODO mudar esta query
+        #query = "UPDATE account SET balance=%s WHERE account_number = %s"
+        #data = (manuf, serial_nr)
+        #cursor.execute(query, data)
+        return render_template("listIVMSpecificEvent.html", cursor=cursor, FILENAME=FILENAME)
+    except Exception as e:
+        return str(e)
+    finally:
+        dbConn.commit()
+        cursor.close()
+        dbConn.close()
 # ———————————————————————————————————————————————————————————————————————————————————————————————————————
-# ———————————————————————————————————————————————————————————————————————————————————————————————————————
+
 
 
 
@@ -157,7 +311,86 @@ def remove_retailer():
 
 #                          Routes related to listing sub-categories of a super-categorie
 # ———————————————————————————————————————————————————————————————————————————————————————————————————————
+@app.route("/list_sub-categs")
+def list_subcategs():
+    dbConn = None
+    cursor = None
+    try:
+        dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+        cursor = dbConn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+        # TODO mudar esta query de contas para nomes das IVMs
+        query = "SELECT account_number FROM account;"
+        cursor.execute(query)
+        return render_template("listSub-categs.html", cursor=cursor, FILENAME=FILENAME)
+    except Exception as e:
+        return str(e)
+    finally:
+        cursor.close()
+        dbConn.close()
+
+
+@app.route("/list_sub-categs_from_super-categ")
+def list_subCategs_from_superCategs():
+    dbConn = None
+    cursor = None
+    try:
+        dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+        cursor = dbConn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+        
+        name = request.args["name"]
+        
+        records = getSubCategs(name, dbConn, cursor)
+        
+        return render_template("listSub-categsFromSuper-categ.html", name=name, records=records, FILENAME=FILENAME)
+        
+    except Exception as e:
+        return str(e)
+        
+    finally:
+        dbConn.commit()
+        cursor.close()
+        dbConn.close()
+
+
+
+def getSubCategs(name, dbConn, cursor):
+    
+    records = []
+    queue = [name]
+    
+    while len(queue) != 0:
+        currentName = queue.pop(0)
+        querry = f"SELECT categoria FROM tem_outra WHERE super_categoria = {currentName}"   
+        
+        cursor.execute(querry) 
+        for record in cursor: 
+            queue.append(record[0])
+            records.append(record[0])
+            
+        cursor.close()
+        cursor = dbConn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+        
+    return records
+            
+    
 # ———————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+
+
+
+
+
+
+# TODO Geral
+# [ ] - "Adicionar sub-categoria"
+# [ ] - meter h1 depois do Tecnico Lisboa a dizer "projeto BD - parte 3", com as mesmas cores dos relatórios
+# [ ] - Quando insiro categoria, meter página de sucesso
+# [ ] - Quando removo categoria, meter página de sucesso
+# [ ] - Quando removo retalhista, meter página de sucesso
+# [ ] - ver a cena da atomicidade, fazer commit no fim de todas as transações 
+
+
 
 
 

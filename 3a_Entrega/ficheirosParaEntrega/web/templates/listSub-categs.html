@@ -32,31 +32,41 @@
         a.btn-primary:hover {
             background-color: #0c5cab;
         }
+
+        td {
+            padding-left: 50px;
+            padding-right: 50px;
+        }
     </style>
 </head>
 
 <body class="text-center center" style="padding:20px">
-
-    <img src="static/img/tecnicoLisboa.svg" alt="tecnicoLisboa">
-
-    <br><br>
-    
-    <h1> Projeto BD - <span style="color:gray"> Parte 3 </span> </h1>
-    <h3> LEIC-A 2021/2022 </h3>
-    
+    {% if cursor %}
+    <h1>Listar sub-categorias de uma super-categoria</h1>
+    <p class="center">Por favor, especifique a super-categoria para a qual deseja ver as sub-categorias:</p>
     <br>
-    
-    <p>Olá! :D</p>
-    <p>Opções possíveis:</p>
-
-    <a href="update_categories" class="btn btn-primary">Inserir ou remover uma categoria/sub-categoria</a>
+    <table style="margin: 0px auto;" class="text-center center table-striped" border="2px">
+        <thead>
+            <tr>
+                <th>Nome da super-categoria</th>
+                <th>Listar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in cursor %}
+            <tr>
+                <td>{{ record[0] }}</td>
+                <td><a href="list_sub-categs_from_super-categ?name={{ record[0] }}">Listar sub-categorias</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     <br><br>
-    <a href="update_retailers" class="btn btn-primary">Inserir ou remover um retalhista</a>
-    <br><br>
-    <a href="list_IVM_events" class="btn btn-primary">Listar todos os eventos de reposição de uma IVM</a>
-    <br><br>
-    <a href="list_sub-categs" class="btn btn-primary">Listar todas as sub-categorias de uma super-categoria</a>
-
+    <a href="../{{ FILENAME }}/" class="btn btn-primary">🏡 Voltar ao ínicio</a>
+    {% else %}
+    <p> Erro: não foi possível obter dados da base de dados!</p>
+    {% endif %}
 </body>
 
 </html>

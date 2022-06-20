@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>List accounts - Flask</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet'>
+    <link rel="icon" type="image/x-icon" href="static/img/favicon.png">
+    <style>
+        body {
+            font-family: 'Comfortaa';
+            font-size: 22px;
+            margin: auto;
+            display: table-cell;
+            vertical-align: middle;
+            height: 100%;
+        }
+
+        html {
+            height: 100%;
+            display: table;
+            margin: auto;
+        }
+
+        a.btn-primary:link,
+        a.btn-primary:visited {
+            background-color: #069ee1;
+        }
+
+        a.btn-primary:hover {
+            background-color: #0c5cab;
+        }
+
+        td {
+            padding-left: 50px;
+            padding-right: 50px;
+        }
+    </style>
+</head>
+
+<body class="text-center" style="padding:20px">
+    {% if rowsSuperCategories and rowsSubCategories %}
+    <br><br>
+    <h1 class="text-center">Adicionar ou remover categorias</h1>
+    <p class="text-center">Por favor:</p>
+    <p> - escolha uma super-categoria/sub-categoria para remover; </p>
+    <p> - adicione uma sub-categoria a uma super-categoria; </p>
+    <p> - adicione uma nova super-categoria/sub-categoria. </p>
+    <br>
+
+    <h2 class="text-center"> Super-Categorias</h2>
+    <br>
+    <table style="margin: 0px auto;" class="text-center center table-striped" border="2px">
+        <thead>
+            <tr>
+                <th>Super-categoria</th>
+                <th>Adicionar a esta super-categoria</th>
+                <th>Remover</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in rowsSuperCategories %}
+            <tr>
+                <td>{{ record[0] }}</td>
+                <!-- <td><a href="add_subCateg_to_superCateg?superCategName={{ record[0] }}">Adicionar sub-categoria</a> -->
+                <td>
+                    <form action="add_subCateg_to_superCateg" method="post">
+                        <p>Nome: <input type="text" name="simpleCategName" placeholder="Ex. {{ [" Bolacha", "Pão"
+                                , "Verdura" , "Baguete" , "Tremoço" , "Sumo" , "Yogurt" , "Tabaco" , "Tenho Fome"
+                                , "Depressão" , ":D" , "Bebidas" , "Cereais e Batatas" , "Lanches doces" , "Laticínios"
+                                , "Cereais e seus produtos" , "Biscoitos e Bolos" , "Biscoitos"
+                                , "Bebidas à base de plantas" , "Iogurtes" , "Produtos para barrar" , "Sobremesas"
+                                , "Frutos do mar" , "Pães" , "Peixe" , "Queijos" , "Refeições"
+                                , "Bebidas à base de frutas" , "Sucos e néctares" , "Gorduras" , "Confeitaria"
+                                , "Petiscos salgados" , "Molhos" , "Chocolates" , "Carnes"
+                                , "Produtos para barrar à base de plantas" , "Legumes e seus produtos" , "Aperitivos"
+                                , "Bebidas alcoólicas" , "Doces para barrar" , "Águas" , "Leites" , "Atum"
+                                , "Nozes e seus produtos" , "Sobremesas congeladas" , "Bebidas carbonatadas"
+                                , "Gelados e sorvetes" , "Carnes preparadas" , "Gorduras vegetals" , "Batatas fritas"
+                                , "Barras" ][(range(0, 50) | random)] }}" /> <input type="submit" value="Adicionar" />
+                            <input type="hidden" name="superCategName" value="{{ record[0] }}" </input>
+                        </p>
+
+                    </form>
+                </td>
+                </td>
+                <td><a href="remove_superCateg?superCategName={{ record[0] }}" style="color: red;">Remover esta
+                        super-categoria</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <h4> Adicionar super-categoria </h3>
+        <p> Por favor, preencha o nome da super-categoria que deseja adicionar </p>
+        <form action="add_superCateg" method="post">
+            <p>Nome do super-categoria: <input type="text" name="name" placeholder="Ex. Arroz" /></p>
+            <p><input type="submit" value="Adicionar" /></p>
+        </form>
+
+        <br>
+        <hr><br>
+
+        <h2 class="text-center"> Sub-Categorias </h2>
+        <br>
+
+        <table style="margin: 0px auto;" class="text-center center table-striped" border="2px">
+            <thead>
+                <tr>
+                    <th>Sub-Categoria</th>
+                    <th>Super-categoria correspondente</th>
+                    <th>Remover</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in rowsSubCategories %}
+                <tr>
+                    <td>{{ record[0] }}</td>
+                    <td>{{ record[1] }}</td>
+                    <td><a href="remove_subCateg?subCategName={{ record[0] }}" style="color: red;">Remover esta
+                            sub-categoria</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <h4> Adicionar sub-categoria </h3>
+            <p> Por favor, preencha o nome da sub-categoria que deseja adicionar </p>
+            <form action="add_subCateg" method="post">
+                <p>Nome do sub-categoria: <input type="text" name="name" placeholder="Ex. Arroz Carolino" /></p>
+                <p><input type="submit" value="Adicionar" /></p>
+            </form>
+
+
+            <br>
+            <a href="../{{ FILENAME }}/" class="center btn btn-primary">🏡 Voltar ao ínicio</a>
+
+            {% else %}
+            <p> Erro: não foi possível obter dados da base de dados!</p>
+            {% endif %}
+</body>
+
+</html>
