@@ -1,3 +1,17 @@
+DROP TABLE categoria CASCADE;
+DROP TABLE categoria_simples CASCADE;
+DROP TABLE super_categoria CASCADE;
+DROP TABLE tem_outra CASCADE;
+DROP TABLE produto CASCADE;
+DROP TABLE tem_categoria CASCADE;
+DROP TABLE IVM CASCADE;
+DROP TABLE ponto_de_retalho CASCADE;
+DROP TABLE instalada_em CASCADE;
+DROP TABLE prateleira CASCADE;
+DROP TABLE planograma CASCADE;
+DROP TABLE retalhista CASCADE;
+DROP TABLE responsavel_por CASCADE;
+DROP TABLE evento_reposicao CASCADE;
 
 --------------------------------------------------------------------------
 --------------------------  Criacao de tabelas  --------------------------
@@ -138,10 +152,10 @@ INSERT INTO categoria VALUES('Comida Saudável');
 INSERT INTO categoria VALUES('Comida - Chips');
 INSERT INTO categoria VALUES('Comida - Diversa');
 -- Lvl 3
-INSERT INTO categoria VALUES('Bebidas Frias sem acucar');
-INSERT INTO categoria VALUES('Bebidas Frias com acucar');
-INSERT INTO categoria VALUES('Bebidas Quentes sem acucar');
-INSERT INTO categoria VALUES('Bebidas Quentes com acucar');
+INSERT INTO categoria VALUES('Bebidas Frias sem açúcar');
+INSERT INTO categoria VALUES('Bebidas Frias com açúcar');
+INSERT INTO categoria VALUES('Bebidas Quentes sem açúcar');
+INSERT INTO categoria VALUES('Bebidas Quentes com açúcar');
 
 
 ----------- categoria simples
@@ -155,10 +169,10 @@ INSERT INTO categoria_simples VALUES('Comida Saudável');
 INSERT INTO categoria_simples VALUES('Comida - Chips');
 INSERT INTO categoria_simples VALUES('Comida - Diversa');
 -- Lvl 3
-INSERT INTO categoria_simples VALUES('Bebidas Frias sem acucar');
-INSERT INTO categoria_simples VALUES('Bebidas Frias com acucar');
-INSERT INTO categoria_simples VALUES('Bebidas Quentes sem acucar');
-INSERT INTO categoria_simples VALUES('Bebidas Quentes com acucar');
+INSERT INTO categoria_simples VALUES('Bebidas Frias sem açúcar');
+INSERT INTO categoria_simples VALUES('Bebidas Frias com açúcar');
+INSERT INTO categoria_simples VALUES('Bebidas Quentes sem açúcar');
+INSERT INTO categoria_simples VALUES('Bebidas Quentes com açúcar');
 
 
 ----------- super_categoria
@@ -192,15 +206,15 @@ INSERT INTO tem_outra VALUES('Comida', 'Comida - Chips');
 INSERT INTO tem_outra VALUES('Comida', 'Comida - Diversa');
 
 -- Lvl 2 => Lvl 3
-INSERT INTO tem_outra VALUES('Bebidas Quentes', 'Bebidas Quentes sem acucar');
-INSERT INTO tem_outra VALUES('Bebidas Quentes', 'Bebidas Quentes com acucar');
-INSERT INTO tem_outra VALUES('Bebidas Frias', 'Bebidas Frias sem acucar');
-INSERT INTO tem_outra VALUES('Bebidas Frias', 'Bebidas Frias com acucar');
+INSERT INTO tem_outra VALUES('Bebidas Quentes', 'Bebidas Quentes sem açúcar');
+INSERT INTO tem_outra VALUES('Bebidas Quentes', 'Bebidas Quentes com açúcar');
+INSERT INTO tem_outra VALUES('Bebidas Frias', 'Bebidas Frias sem açúcar');
+INSERT INTO tem_outra VALUES('Bebidas Frias', 'Bebidas Frias com açúcar');
 
 
 ----------- produto
 INSERT INTO produto VALUES('7666524286794', 'Doritos Banana', 'Comida - Chips');
-INSERT INTO produto VALUES('9519839391742', 'Maca Reineta', 'Comida Saudável');
+INSERT INTO produto VALUES('9519839391742', 'Maçã Reineta', 'Comida Saudável');
 INSERT INTO produto VALUES('8228319498508', 'Tofu', 'Comida Saudável');
 INSERT INTO produto VALUES('7897560363456', 'Cola UHU batom', 'Material de artes');
 INSERT INTO produto VALUES('8476179764055', 'Caneta BIC azul-clara', 'Material de escrita');
@@ -208,15 +222,15 @@ INSERT INTO produto VALUES('8608781717131', 'Tesoura sem pontas', 'Material de a
 INSERT INTO produto VALUES('9745636370867', 'Pato de borracha amarelo', 'Material diverso');
 INSERT INTO produto VALUES('1142135172864', 'Pastilha elástica sabor canela', 'Comida - Diversa');
 INSERT INTO produto VALUES('3721299173738', 'Caramelos cremosos', 'Comida - Diversa');
-INSERT INTO produto VALUES('2003201507481', 'Coca-Cola zero', 'Bebidas Frias sem acucar');
-INSERT INTO produto VALUES('2003201507482', 'Pepsi Max', 'Bebidas Frias sem acucar');
-INSERT INTO produto VALUES('9327697790291', 'Coca-Cola caramelo', 'Bebidas Frias com acucar');
-INSERT INTO produto VALUES('4906557087560', 'Fanta limao', 'Bebidas Frias com acucar');
-INSERT INTO produto VALUES('4885688144658', 'Iced Tea pêssego', 'Bebidas Frias com acucar');
-INSERT INTO produto VALUES('1793985090306', 'Chá de limao', 'Bebidas Quentes com acucar');
-INSERT INTO produto VALUES('8524357146284', 'Copo de leite', 'Bebidas Quentes sem acucar');
-INSERT INTO produto VALUES('7988481049998', 'Cappuccino', 'Bebidas Quentes com acucar');
-INSERT INTO produto VALUES('1839347963471', 'Starbuck coffee', 'Bebidas Frias com acucar');
+INSERT INTO produto VALUES('2003201507481', 'Coca-Cola zero', 'Bebidas Frias sem açúcar');
+INSERT INTO produto VALUES('2003201507482', 'Pepsi Max', 'Bebidas Frias sem açúcar');
+INSERT INTO produto VALUES('9327697790291', 'Coca-Cola caramelo', 'Bebidas Frias com açúcar');
+INSERT INTO produto VALUES('4906557087560', 'Fanta limão', 'Bebidas Frias com açúcar');
+INSERT INTO produto VALUES('4885688144658', 'Iced Tea pêssego', 'Bebidas Frias com açúcar');
+INSERT INTO produto VALUES('1793985090306', 'Chá de limao', 'Bebidas Quentes com açúcar');
+INSERT INTO produto VALUES('8524357146284', 'Copo de leite', 'Bebidas Quentes sem açúcar');
+INSERT INTO produto VALUES('7988481049998', 'Cappuccino', 'Bebidas Quentes com açúcar');
+INSERT INTO produto VALUES('1839347963471', 'Starbuck coffee', 'Bebidas Frias com açúcar');
 INSERT INTO produto VALUES('6256453770703', 'Cones de milho', 'Comida - Diversa');
 INSERT INTO produto VALUES('8973425695373', 'Pringles simples', 'Comida - Chips');
 INSERT INTO produto VALUES('3584420578315', 'Pringles Cebola', 'Comida - Chips');
@@ -232,15 +246,15 @@ INSERT INTO tem_categoria VALUES('8608781717131', 'Material de artes');
 INSERT INTO tem_categoria VALUES('9745636370867', 'Material diverso');
 INSERT INTO tem_categoria VALUES('1142135172864', 'Comida - Diversa');
 INSERT INTO tem_categoria VALUES('3721299173738', 'Comida - Diversa');
-INSERT INTO tem_categoria VALUES('2003201507481', 'Bebidas Frias sem acucar');
-INSERT INTO tem_categoria VALUES('2003201507482', 'Bebidas Frias sem acucar');
-INSERT INTO tem_categoria VALUES('9327697790291', 'Bebidas Frias com acucar');
-INSERT INTO tem_categoria VALUES('4906557087560', 'Bebidas Frias com acucar');
-INSERT INTO tem_categoria VALUES('4885688144658', 'Bebidas Frias com acucar');
-INSERT INTO tem_categoria VALUES('1793985090306', 'Bebidas Quentes com acucar');
-INSERT INTO tem_categoria VALUES('8524357146284', 'Bebidas Quentes sem acucar');
-INSERT INTO tem_categoria VALUES('7988481049998', 'Bebidas Quentes com acucar');
-INSERT INTO tem_categoria VALUES('1839347963471', 'Bebidas Frias com acucar');
+INSERT INTO tem_categoria VALUES('2003201507481', 'Bebidas Frias sem açúcar');
+INSERT INTO tem_categoria VALUES('2003201507482', 'Bebidas Frias sem açúcar');
+INSERT INTO tem_categoria VALUES('9327697790291', 'Bebidas Frias com açúcar');
+INSERT INTO tem_categoria VALUES('4906557087560', 'Bebidas Frias com açúcar');
+INSERT INTO tem_categoria VALUES('4885688144658', 'Bebidas Frias com açúcar');
+INSERT INTO tem_categoria VALUES('1793985090306', 'Bebidas Quentes com açúcar');
+INSERT INTO tem_categoria VALUES('8524357146284', 'Bebidas Quentes sem açúcar');
+INSERT INTO tem_categoria VALUES('7988481049998', 'Bebidas Quentes com açúcar');
+INSERT INTO tem_categoria VALUES('1839347963471', 'Bebidas Frias com açúcar');
 INSERT INTO tem_categoria VALUES('6256453770703', 'Comida - Diversa');
 INSERT INTO tem_categoria VALUES('8973425695373', 'Comida - Chips');
 INSERT INTO tem_categoria VALUES('3584420578315', 'Comida - Chips');
@@ -249,8 +263,8 @@ INSERT INTO tem_categoria VALUES('3584420578315', 'Comida - Chips');
 ----------- IVM
 INSERT INTO IVM VALUES('11345', 'Pedro Lda.');
 INSERT INTO IVM VALUES('6789', 'Pedro Lda.');
-INSERT INTO IVM VALUES('121212', 'Joao Lda.');
-INSERT INTO IVM VALUES('343434', 'Joao Lda.');
+INSERT INTO IVM VALUES('121212', 'João Lda.');
+INSERT INTO IVM VALUES('343434', 'João Lda.');
 INSERT INTO IVM VALUES('555555', 'Ricardo Lda.');
 INSERT INTO IVM VALUES('666666', 'Ricardo Lda.');
 
@@ -266,8 +280,8 @@ INSERT INTO ponto_de_retalho VALUES('Forum Algarve', 'Faro', 'Algarve');
 ----------- instalada_em
 INSERT INTO instalada_em VALUES(11345, 'Pedro Lda.', 'IST - Alameda');
 INSERT INTO instalada_em VALUES(6789, 'Pedro Lda.', 'MCDonalds Sintra');
-INSERT INTO instalada_em VALUES(121212,  'Joao Lda.', 'IST - Taguspark');
-INSERT INTO instalada_em VALUES(343434,  'Joao Lda.', 'Alverca FC');
+INSERT INTO instalada_em VALUES(121212,  'João Lda.', 'IST - Taguspark');
+INSERT INTO instalada_em VALUES(343434,  'João Lda.', 'Alverca FC');
 INSERT INTO instalada_em VALUES(555555, 'Ricardo Lda.', 'Metro do Porto');
 INSERT INTO instalada_em VALUES(666666, 'Ricardo Lda.', 'Forum Algarve');
 
@@ -281,20 +295,20 @@ INSERT INTO prateleira VALUES(1, '6789', 'Pedro Lda.', 50, 'Material de artes');
 INSERT INTO prateleira VALUES(2, '6789', 'Pedro Lda.', 30, 'Material de escrita');
 INSERT INTO prateleira VALUES(3, '6789', 'Pedro Lda.', 50, 'Material diverso');
 
-INSERT INTO prateleira VALUES(1, '121212', 'Joao Lda.', 70, 'Comida Saudável');
-INSERT INTO prateleira VALUES(2, '121212', 'Joao Lda.', 85, 'Bebidas Frias sem acucar');
-INSERT INTO prateleira VALUES(3, '121212', 'Joao Lda.', 50, 'Bebidas Quentes sem acucar');
+INSERT INTO prateleira VALUES(1, '121212', 'João Lda.', 70, 'Comida Saudável');
+INSERT INTO prateleira VALUES(2, '121212', 'João Lda.', 85, 'Bebidas Frias sem açúcar');
+INSERT INTO prateleira VALUES(3, '121212', 'João Lda.', 50, 'Bebidas Quentes sem açúcar');
 
-INSERT INTO prateleira VALUES(1, '343434', 'Joao Lda.', 30,  'Comida - Chips');
-INSERT INTO prateleira VALUES(2, '343434', 'Joao Lda.', 30, 'Bebidas Frias com acucar');
-INSERT INTO prateleira VALUES(3, '343434', 'Joao Lda.', 40, 'Bebidas Quentes com acucar');
+INSERT INTO prateleira VALUES(1, '343434', 'João Lda.', 30,  'Comida - Chips');
+INSERT INTO prateleira VALUES(2, '343434', 'João Lda.', 30, 'Bebidas Frias com açúcar');
+INSERT INTO prateleira VALUES(3, '343434', 'João Lda.', 40, 'Bebidas Quentes com açúcar');
 
 INSERT INTO prateleira VALUES(1, '555555', 'Ricardo Lda.', 50, 'Material de escrita');
 INSERT INTO prateleira VALUES(2, '555555', 'Ricardo Lda.', 40, 'Comida - Diversa');
-INSERT INTO prateleira VALUES(3, '555555', 'Ricardo Lda.', 30, 'Bebidas Frias sem acucar');
+INSERT INTO prateleira VALUES(3, '555555', 'Ricardo Lda.', 30, 'Bebidas Frias sem açúcar');
 
 INSERT INTO prateleira VALUES(1, '666666', 'Ricardo Lda.', 85, 'Comida - Chips');
-INSERT INTO prateleira VALUES(2, '666666', 'Ricardo Lda.', 40, 'Bebidas Quentes com acucar');
+INSERT INTO prateleira VALUES(2, '666666', 'Ricardo Lda.', 40, 'Bebidas Quentes com açúcar');
 INSERT INTO prateleira VALUES(3, '666666', 'Ricardo Lda.', 70,  'Material de artes');
 
 
@@ -304,11 +318,11 @@ INSERT INTO planograma VALUES(9519839391742, 2, '11345', 'Pedro Lda.', 5, 30, ' 
 
 INSERT INTO planograma VALUES(8228319498508, 1, '6789', 'Pedro Lda.', 6, 40, ' ');
 
-INSERT INTO planograma VALUES(7897560363456, 1, '121212', 'Joao Lda.', 3, 20, ' ');
-INSERT INTO planograma VALUES(8476179764055, 2, '121212', 'Joao Lda.', 7, 20, ' ');
-INSERT INTO planograma VALUES(8608781717131, 3, '121212', 'Joao Lda.', 8, 30, ' ');
+INSERT INTO planograma VALUES(7897560363456, 1, '121212', 'João Lda.', 3, 20, ' ');
+INSERT INTO planograma VALUES(8476179764055, 2, '121212', 'João Lda.', 7, 20, ' ');
+INSERT INTO planograma VALUES(8608781717131, 3, '121212', 'João Lda.', 8, 30, ' ');
 
-INSERT INTO planograma VALUES(9745636370867, 1, '343434', 'Joao Lda.', 4, 10, ' ');
+INSERT INTO planograma VALUES(9745636370867, 1, '343434', 'João Lda.', 4, 10, ' ');
 
 INSERT INTO planograma VALUES(1142135172864, 1, '555555', 'Ricardo Lda.', 9, 20, ' ');
 INSERT INTO planograma VALUES(2003201507481, 2, '555555', 'Ricardo Lda.', 5, 20, ' ');
@@ -328,10 +342,10 @@ INSERT INTO retalhista VALUES(666666666, 'José');
 
 ----------- responsavel_por
 INSERT INTO responsavel_por VALUES('Comida', 111111111, '11345', 'Pedro Lda.');
-INSERT INTO responsavel_por VALUES('Comida', 222222222, '121212', 'Joao Lda.');
+INSERT INTO responsavel_por VALUES('Comida', 222222222, '121212', 'João Lda.');
 INSERT INTO responsavel_por VALUES('Bebidas', 333333333, '555555', 'Ricardo Lda.');
 INSERT INTO responsavel_por VALUES('Bebidas', 444444444, '666666', 'Ricardo Lda.');
-INSERT INTO responsavel_por VALUES('Material', 555555555, '343434', 'Joao Lda.');
+INSERT INTO responsavel_por VALUES('Material', 555555555, '343434', 'João Lda.');
 INSERT INTO responsavel_por VALUES('Material', 666666666, '6789', 'Pedro Lda.');
 
 
@@ -341,17 +355,13 @@ INSERT INTO evento_reposicao VALUES(9519839391742, 2, '11345', 'Pedro Lda.', '20
 
 INSERT INTO evento_reposicao VALUES(2003201507481, 2, '555555', 'Ricardo Lda.', '2022-06-02 21:14:15.653', 6, 222222222);
 
-INSERT INTO evento_reposicao VALUES(7897560363456, 1, '121212', 'Joao Lda.', '2022-01-02 22:54:17.889', 7, 333333333);
-INSERT INTO evento_reposicao VALUES(8476179764055, 2, '121212', 'Joao Lda.', '2022-04-04 14:14:15.113', 8, 333333333);
+INSERT INTO evento_reposicao VALUES(7897560363456, 1, '121212', 'João Lda.', '2022-01-02 22:54:17.889', 7, 333333333);
+INSERT INTO evento_reposicao VALUES(8476179764055, 2, '121212', 'João Lda.', '2022-04-04 14:14:15.113', 8, 333333333);
 
 INSERT INTO evento_reposicao VALUES(9327697790291, 1, '666666', 'Ricardo Lda.', '2022-11-11 11:11:11.111', 1, 444444444);
 
-INSERT INTO evento_reposicao VALUES(9745636370867, 1, '343434', 'Joao Lda.', '2022-12-21 12:21:12.212', 2, 555555555);
-INSERT INTO evento_reposicao VALUES(9745636370867, 1, '343434', 'Joao Lda.', '2022-01-01 01:01:01.123', 3, 555555555);
-INSERT INTO evento_reposicao VALUES(9745636370867, 1, '343434', 'Joao Lda.', '2022-01-04 10:44:44.123', 4, 555555555);
+INSERT INTO evento_reposicao VALUES(9745636370867, 1, '343434', 'João Lda.', '2022-12-21 12:21:12.212', 2, 555555555);
+INSERT INTO evento_reposicao VALUES(9745636370867, 1, '343434', 'João Lda.', '2022-01-01 01:01:01.123', 3, 555555555);
+INSERT INTO evento_reposicao VALUES(9745636370867, 1, '343434', 'João Lda.', '2022-01-04 10:44:44.123', 4, 555555555);
 
 INSERT INTO evento_reposicao VALUES(8228319498508, 1, '6789', 'Pedro Lda.', '2022-01-03 10:34:16.123', 5, 666666666);
-
-/* 
-INSERT INTO evento_reposicao VALUES( ); 
-*/
