@@ -41,27 +41,27 @@
 </head>
 
 <body class="text-center" style="padding:20px">
-    {% if rowsSuperCategories and rowsSubCategories %}
+    {% if cursor %}
     <br><br>
     <h1 class="text-center">Adicionar ou remover categorias</h1>
     <p class="text-center">Por favor:</p>
-    <p> - escolha uma super-categoria/sub-categoria para remover; </p>
-    <p> - adicione uma sub-categoria a uma super-categoria; </p>
-    <p> - adicione uma nova super-categoria/sub-categoria. </p>
+    <p> - escolha uma categoria para remover; </p>
+    <p> - adicione uma sub-categoria a uma categoria; </p>
+    <p> - adicione uma nova categoria. </p>
     <br>
 
-    <h2 class="text-center"> Super-Categorias</h2>
+    <h2 class="text-center"> Todas as categorias </h2>
     <br>
     <table style="margin: 0px auto;" class="text-center center table-striped" border="2px">
         <thead>
             <tr>
-                <th>Super-categoria</th>
-                <th>Adicionar a esta super-categoria</th>
+                <th>Categoria</th>
+                <th>Adicionar sub-categoria a esta categoria</th>
                 <th>Remover</th>
             </tr>
         </thead>
         <tbody>
-            {% for record in rowsSuperCategories %}
+            {% for record in cursor %}
             <tr>
                 <td>{{ record[0] }}</td>
                 <!-- <td><a href="add_subCateg_to_superCateg?superCategName={{ record[0] }}">Adicionar sub-categoria</a> -->
@@ -69,7 +69,7 @@
                     <form action="add_subCateg_to_superCateg" method="post">
                         <p>Nome: <input type="text" name="simpleCategName" placeholder="Ex. {{ [" Bolacha", "Pão"
                                 , "Verdura" , "Baguete" , "Tremoço" , "Sumo" , "Yogurt" , "Tabaco" , "Tenho Fome"
-                                , "Depressão" , ":D" , "Bebidas" , "Cereais e Batatas" , "Lanches doces" , "Laticínios"
+                                , "Socorro" , ":D" , "Bebidas" , "Cereais e Batatas" , "Lanches doces" , "Laticínios"
                                 , "Cereais e seus produtos" , "Biscoitos e Bolos" , "Biscoitos"
                                 , "Bebidas à base de plantas" , "Iogurtes" , "Produtos para barrar" , "Sobremesas"
                                 , "Frutos do mar" , "Pães" , "Peixe" , "Queijos" , "Refeições"
@@ -86,62 +86,27 @@
                     </form>
                 </td>
                 </td>
-                <td><a href="remove_superCateg?superCategName={{ record[0] }}" style="color: red;">Remover esta
-                        super-categoria</a>
+                <td><a href="remove_categ?categName={{ record[0] }}" style="color: red;">Remover esta
+                        categoria</a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     <br>
-    <h4> Adicionar super-categoria </h3>
-        <p> Por favor, preencha o nome da super-categoria que deseja adicionar </p>
-        <form action="add_superCateg" method="post">
-            <p>Nome do super-categoria: <input type="text" name="name" placeholder="Ex. Arroz" /></p>
+    <h4> Adicionar categoria independente </h3>
+        <p> Se quiser, pode adicionar uma categoria sem ser uma sub-categoria de uma super-categoria. </p>
+        <p> Por favor, preencha o nome da categoria que deseja adicionar: </p>
+        <form action="add_categ" method="post">
+            <p>Nome da categoria: <input type="text" name="name" placeholder="Ex. Arroz" /></p>
             <p><input type="submit" value="Adicionar" /></p>
         </form>
-
         <br>
-        <hr><br>
+        <a href="../{{ FILENAME }}/" class="center btn btn-primary">🏡 Voltar ao ínicio</a>
 
-        <h2 class="text-center"> Sub-Categorias </h2>
-        <br>
-
-        <table style="margin: 0px auto;" class="text-center center table-striped" border="2px">
-            <thead>
-                <tr>
-                    <th>Sub-Categoria</th>
-                    <th>Super-categoria correspondente</th>
-                    <th>Remover</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for record in rowsSubCategories %}
-                <tr>
-                    <td>{{ record[0] }}</td>
-                    <td>{{ record[1] }}</td>
-                    <td><a href="remove_subCateg?subCategName={{ record[0] }}" style="color: red;">Remover esta
-                            sub-categoria</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <br>
-        <h4> Adicionar sub-categoria </h3>
-            <p> Por favor, preencha o nome da sub-categoria que deseja adicionar </p>
-            <form action="add_subCateg" method="post">
-                <p>Nome do sub-categoria: <input type="text" name="name" placeholder="Ex. Arroz Carolino" /></p>
-                <p><input type="submit" value="Adicionar" /></p>
-            </form>
-
-
-            <br>
-            <a href="../{{ FILENAME }}/" class="center btn btn-primary">🏡 Voltar ao ínicio</a>
-
-            {% else %}
-            <p> Erro: não foi possível obter dados da base de dados!</p>
-            {% endif %}
+        {% else %}
+        <p> Erro: não foi possível obter dados da base de dados!</p>
+        {% endif %}
 </body>
 
 </html>

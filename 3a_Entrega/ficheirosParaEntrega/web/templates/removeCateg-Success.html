@@ -32,39 +32,17 @@
         a.btn-primary:hover {
             background-color: #0c5cab;
         }
-
-        td {
-            padding-left: 50px;
-            padding-right: 50px;
-        }
     </style>
 </head>
 
-<body class="text-center center" style="padding:20px">
-    {% if records %}
-    <h1>Sub-categorias de {{ name }}</h1>
-    <p class="center">As sub-categorias, a todos os níveis de profundidade, da super-categoria {{ name }} são as seguintes: </p>
-    <br>
-    <table style="margin: 0px auto;" class="text-center center table-striped" border="2px">
-        <thead>
-            <tr>
-                <th> Nome das sub-categorias </th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for record in records %}
-            <tr>
-                <td>{{ record }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <br><br>
-    <a href="list_sub-categs" class="text-center btn btn-outline-primary">◀️ Voltar atrás </a>
-    <a href="../{{ FILENAME }}/" class="btn btn-primary">🏡 Voltar ao ínicio</a>
-    {% else %}
-    <p> Erro: não foi possível obter dados da base de dados!</p>
-    {% endif %}
+<body class="text-center">
+    <h3> Sucesso! :D </h3>
+    <p> A categoria {{ categName }} foi removida com sucesso! </p> 
+    <br> 
+    <a href="update_categories" class="text-center btn btn-outline-primary">◀️ Voltar atrás</a>
+    
+    <a href="../{{ FILENAME }}/" class="text-center btn btn-primary">🏡 Voltar ao ínicio </a>
+    
 </body>
 
 </html>

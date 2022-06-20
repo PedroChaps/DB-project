@@ -41,32 +41,15 @@
 </head>
 
 <body class="text-center center" style="padding:20px">
-    {% if cursor %}
-    <h1>Listar eventos de reposição</h1>
-    <p class="center">Os eventos de reposição da IVM especificada são os seguintes:</p>
+
+    <h1>Oh não! D:</h1>
+    <p>Ocorreu um erro :(</p>
     <br>
-    <table style="margin: 0px auto;" class="text-center center table-striped" border="2px">
-        <thead>
-            <tr>
-                <th>Categoria de produto</th>
-                <th>Unidades repostas</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for record in cursor %}
-            <tr>
-                <td>{{ record[0] }}</td>
-                <td>{{ record[1] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <br>
-    <a href="list_IVM_events" class="text-center btn btn-outline-primary">◀️ Voltar atrás </a>
+    <p>O erro foi o seguinte:</p>
+    <q style="color: red">{{ error }}</q>
+    <br><br><br>
     <a href="../{{ FILENAME }}/" class="btn btn-primary">🏡 Voltar ao ínicio</a>
-    {% else %}
-    <p> Erro: não foi possível obter dados da base de dados!</p>
-    {% endif %}
+
 </body>
 
 </html>

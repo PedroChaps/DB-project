@@ -341,12 +341,12 @@ INSERT INTO retalhista VALUES(666666666, 'José');
 
 
 ----------- responsavel_por
-INSERT INTO responsavel_por VALUES('Comida', 111111111, '11345', 'Pedro Lda.');
-INSERT INTO responsavel_por VALUES('Comida', 222222222, '121212', 'João Lda.');
-INSERT INTO responsavel_por VALUES('Bebidas', 333333333, '555555', 'Ricardo Lda.');
-INSERT INTO responsavel_por VALUES('Bebidas', 444444444, '666666', 'Ricardo Lda.');
-INSERT INTO responsavel_por VALUES('Material', 555555555, '343434', 'João Lda.');
-INSERT INTO responsavel_por VALUES('Material', 666666666, '6789', 'Pedro Lda.');
+INSERT INTO responsavel_por VALUES('Comida Saudável', 111111111, '11345', 'Pedro Lda.');
+INSERT INTO responsavel_por VALUES('Comida - Chips', 222222222, '121212', 'João Lda.');
+INSERT INTO responsavel_por VALUES('Bebidas Frias com açúcar', 333333333, '555555', 'Ricardo Lda.');
+INSERT INTO responsavel_por VALUES('Bebidas Quentes com açúcar', 444444444, '666666', 'Ricardo Lda.');
+INSERT INTO responsavel_por VALUES('Material de artes', 555555555, '343434', 'João Lda.');
+INSERT INTO responsavel_por VALUES('Material diverso', 666666666, '6789', 'Pedro Lda.');
 
 
 ----------- evento_reposicao
