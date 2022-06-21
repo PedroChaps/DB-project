@@ -18,25 +18,25 @@ DROP TABLE evento_reposicao CASCADE;
 --------------------------------------------------------------------------
 
 CREATE TABLE categoria (
-    nome varchar(80),
+    nome varchar(40),
     CONSTRAINT pk_categoria PRIMARY KEY(nome)
 );
 
 CREATE TABLE categoria_simples (
-    nome varchar(80),
+    nome varchar(40),
     CONSTRAINT pk_categoria_simples PRIMARY KEY(nome),
     CONSTRAINT fk_categoria_simples_categoria FOREIGN KEY(nome) REFERENCES categoria(nome)
 );
 
 CREATE TABLE super_categoria (
-    nome varchar(80),
+    nome varchar(40),
     CONSTRAINT pk_super_categoria PRIMARY KEY(nome),
     CONSTRAINT fk_super_categoria_categoria FOREIGN KEY(nome) REFERENCES categoria(nome)
 );
 
 CREATE TABLE tem_outra (
-    super_categoria varchar(80),
-    categoria varchar(80),
+    super_categoria varchar(40),
+    categoria varchar(40),
     CONSTRAINT pk_tem_outra PRIMARY KEY(categoria),
     CONSTRAINT fk_tem_outra_super_categoria FOREIGN KEY(super_categoria) REFERENCES super_categoria(nome),
     CONSTRAINT fk_tem_outra_categoria FOREIGN KEY(categoria) REFERENCES categoria(nome)
@@ -45,14 +45,14 @@ CREATE TABLE tem_outra (
 CREATE TABLE produto (
     ean numeric,
     descr varchar(420),
-    cat varchar(80),
+    cat varchar(40),
     CONSTRAINT pk_produto PRIMARY KEY(ean),
     CONSTRAINT fk_produto_categoria FOREIGN KEY(cat) REFERENCES categoria(nome)
 );
 
 CREATE TABLE tem_categoria (
     ean numeric,
-    nome varchar(80),
+    nome varchar(40),
     CONSTRAINT pk_tem_categoria PRIMARY KEY(ean, nome),
     CONSTRAINT fk_tem_categoria_produto FOREIGN KEY(ean) REFERENCES produto(ean),
     CONSTRAINT fk_tem_categoria_categoria FOREIGN KEY(nome) REFERENCES categoria(nome)
@@ -60,21 +60,21 @@ CREATE TABLE tem_categoria (
 
 CREATE TABLE IVM (
     num_serie integer,
-    fabricante varchar(80),
+    fabricante varchar(40),
     CONSTRAINT pk_IVM PRIMARY KEY(num_serie, fabricante)
 );
 
 CREATE TABLE ponto_de_retalho (
-    nome varchar(80),
-    distrito varchar(80),
-    concelho varchar(80),
+    nome varchar(40),
+    distrito varchar(40),
+    concelho varchar(40),
     CONSTRAINT pk_ponto_de_retalho PRIMARY KEY(nome)
 );
 
 CREATE TABLE instalada_em (
     num_serie integer,
-    fabricante varchar(80),
-    local_ varchar(80),
+    fabricante varchar(40),
+    local_ varchar(40),
     CONSTRAINT pk_instalada_em PRIMARY KEY(num_serie, fabricante),
     CONSTRAINT fk_instalada_em_ponto_de_retalho FOREIGN KEY(local_) REFERENCES ponto_de_retalho(nome)
 );
@@ -82,9 +82,9 @@ CREATE TABLE instalada_em (
 CREATE TABLE prateleira (
     nro integer,
     num_serie integer,
-    fabricante varchar(80),
+    fabricante varchar(40),
     altura integer, -- assumimos que está em centímetros
-    nome varchar(80), 
+    nome varchar(40), 
     CONSTRAINT pk_prateleira PRIMARY KEY(nro, num_serie, fabricante),
     CONSTRAINT fk_prateleira_categoria FOREIGN KEY(nome) REFERENCES categoria(nome)
 );
@@ -93,10 +93,10 @@ CREATE TABLE planograma (
     ean numeric,
     nro integer,
     num_serie integer,
-    fabricante varchar(80),
+    fabricante varchar(40),
     faces integer,
     unidades integer,
-    loc varchar(80), -- TODO sei lá o que é isto
+    loc varchar(40), -- TODO sei lá o que é isto
     CONSTRAINT pk_planograma PRIMARY KEY(ean, nro, num_serie, fabricante),
     CONSTRAINT fk_planograma_produto FOREIGN KEY(ean) REFERENCES produto(ean),
     CONSTRAINT fk_planograma_prateleira FOREIGN KEY(nro, num_serie, fabricante) REFERENCES prateleira(nro, num_serie, fabricante)
@@ -104,16 +104,16 @@ CREATE TABLE planograma (
 
 CREATE TABLE retalhista (
     tin integer,
-    nome varchar(80),
+    nome varchar(40),
     CONSTRAINT pk_retalhista PRIMARY KEY(tin),
     UNIQUE(nome)
 );
 
 CREATE TABLE responsavel_por (
-    nome_cat varchar(80),
+    nome_cat varchar(40),
     tin integer,
     num_serie integer,
-    fabricante varchar(80),
+    fabricante varchar(40),
     CONSTRAINT pk_responsavel_por PRIMARY KEY(num_serie, fabricante),
     CONSTRAINT fk_responsavel_por_IVM FOREIGN KEY(num_serie, fabricante) REFERENCES IVM(num_serie, fabricante),
     CONSTRAINT fk_responsavel_por_retalhista FOREIGN KEY(tin) REFERENCES retalhista(tin),
@@ -124,7 +124,7 @@ CREATE TABLE evento_reposicao(
     ean numeric,
     nro integer,
     num_serie integer,
-    fabricante varchar(80),
+    fabricante varchar(40),
     instante timestamp,
     unidades integer,
     tin integer,
@@ -163,8 +163,6 @@ INSERT INTO categoria VALUES('Bebidas Quentes com açúcar');
 INSERT INTO categoria_simples VALUES('Material de escrita');
 INSERT INTO categoria_simples VALUES('Material de artes');
 INSERT INTO categoria_simples VALUES('Material diverso');
-INSERT INTO categoria_simples VALUES('Bebidas Quentes');
-INSERT INTO categoria_simples VALUES('Bebidas Frias');
 INSERT INTO categoria_simples VALUES('Comida Saudável');
 INSERT INTO categoria_simples VALUES('Comida - Chips');
 INSERT INTO categoria_simples VALUES('Comida - Diversa');
