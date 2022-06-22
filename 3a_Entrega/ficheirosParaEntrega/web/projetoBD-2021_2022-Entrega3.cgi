@@ -128,14 +128,46 @@ def remove_categ():
         cursor.execute(query, (categName,))
         query = "DELETE FROM tem_categoria WHERE nome=%s"
         cursor.execute(query, (categName,))
+        # Deletes the product first from planograma, then from the table produto
+        # Finds the products first
+        query = "SELECT ean FROM produto WHERE cat=%s"
+        cursor.execute(query, (categName,))
+        rows_product_ean = cursor.fetchall()
+        
+        # For a given product (that is about to be deleted), deletes it's entries from the
+        # tables evento_reposicao and planograma
+        for row in rows_product_ean:
+            query = "DELETE FROM evento_reposicao WHERE ean=%s"
+            cursor.execute(query, (row[0],))
+        
+            query = "DELETE FROM planograma WHERE ean=%s"
+            cursor.execute(query, (row[0],))
+        
+        # Only then deletes the product
         query = "DELETE FROM produto WHERE cat=%s"
         cursor.execute(query, (categName,))
+        
+        # Prepares to delete the entries from prateleira
+        query = "SELECT nro, num_serie, fabricante FROM prateleira WHERE nome=%s"
+        cursor.execute(query, (categName,))
+        rows_prateleira_nroNumserieFabricante = cursor.fetchall()
+        
+        # Before deleting the entries, finds all dependencies and deletes them first
+        for row in rows_prateleira_nroNumserieFabricante:
+            query = "DELETE FROM evento_reposicao WHERE nro=%s AND num_serie=%s AND fabricante=%s"
+            cursor.execute(query, (row[0], row[1], row[2]))  
+            query = "DELETE FROM planograma WHERE nro=%s AND num_serie=%s AND fabricante=%s"
+            cursor.execute(query, (row[0], row[1], row[2]))     
+        
+        # Only then deletes the entries from prateleira
         query = "DELETE FROM prateleira WHERE nome=%s"
         cursor.execute(query, (categName,))
-        query = "DELETE FROM prateleira WHERE nome=%s"
-        cursor.execute(query, (categName,))
+        
+        # Also deletes from the table responsavel_por
         query = "DELETE FROM responsavel_por WHERE nome_cat=%s"
         cursor.execute(query, (categName,))
+        
+        # Deletes the final entries from the main tables
         query = "DELETE FROM categoria_simples WHERE nome=%s"
         cursor.execute(query, (categName,))
         query = "DELETE FROM super_categoria WHERE nome=%s"

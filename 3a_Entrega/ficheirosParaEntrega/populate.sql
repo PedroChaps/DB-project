@@ -314,18 +314,18 @@ INSERT INTO prateleira VALUES(3, '666666', 'Ricardo Lda.', 70,  'Material de art
 INSERT INTO planograma VALUES(7666524286794, 1, '11345', 'Pedro Lda.', 4, 20, ' ');
 INSERT INTO planograma VALUES(9519839391742, 2, '11345', 'Pedro Lda.', 5, 30, ' ');
 
-INSERT INTO planograma VALUES(8228319498508, 1, '6789', 'Pedro Lda.', 6, 40, ' ');
+INSERT INTO planograma VALUES(7897560363456, 1, '6789', 'Pedro Lda.', 6, 40, ' ');
 
-INSERT INTO planograma VALUES(7897560363456, 1, '121212', 'João Lda.', 3, 20, ' ');
-INSERT INTO planograma VALUES(8476179764055, 2, '121212', 'João Lda.', 7, 20, ' ');
-INSERT INTO planograma VALUES(8608781717131, 3, '121212', 'João Lda.', 8, 30, ' ');
+INSERT INTO planograma VALUES(8228319498508, 1, '121212', 'João Lda.', 3, 20, ' ');
+INSERT INTO planograma VALUES(2003201507482, 2, '121212', 'João Lda.', 7, 20, ' ');
+INSERT INTO planograma VALUES(8524357146284, 3, '121212', 'João Lda.', 8, 30, ' ');
 
-INSERT INTO planograma VALUES(9745636370867, 1, '343434', 'João Lda.', 4, 10, ' ');
+INSERT INTO planograma VALUES(8973425695373, 1, '343434', 'João Lda.', 4, 10, ' ');
 
-INSERT INTO planograma VALUES(1142135172864, 1, '555555', 'Ricardo Lda.', 9, 20, ' ');
-INSERT INTO planograma VALUES(2003201507481, 2, '555555', 'Ricardo Lda.', 5, 20, ' ');
+INSERT INTO planograma VALUES(8476179764055, 1, '555555', 'Ricardo Lda.', 9, 20, ' ');
+INSERT INTO planograma VALUES(1142135172864, 2, '555555', 'Ricardo Lda.', 5, 20, ' ');
 
-INSERT INTO planograma VALUES(9327697790291, 1, '666666', 'Ricardo Lda.', 6, 30, ' ');
+INSERT INTO planograma VALUES(3584420578315, 1, '666666', 'Ricardo Lda.', 6, 30, ' ');
 
 
 ----------- retalhista
