@@ -53,7 +53,7 @@ CREATE TABLE produto (
 CREATE TABLE tem_categoria (
     ean numeric,
     nome varchar(40),
-    CONSTRAINT pk_tem_categoria PRIMARY KEY(ean, nome),
+    CONSTRAINT pk_tem_categoria PRIMARY KEY(nome, ean),
     CONSTRAINT fk_tem_categoria_produto FOREIGN KEY(ean) REFERENCES produto(ean),
     CONSTRAINT fk_tem_categoria_categoria FOREIGN KEY(nome) REFERENCES categoria(nome)
 );
