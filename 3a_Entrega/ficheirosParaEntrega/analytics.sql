@@ -14,7 +14,6 @@ GROUP BY
 
 -- o número total de artigos vendidos num dado distrito (i.e. “Lisboa”), por concelho, categoria, dia da semana e no total
 
-
 SELECT v.concelho, v.cat, v.dia_semana, SUM(v.unidades) AS unidades_totais
 FROM Vendas v
 WHERE v.distrito = "Lisboa"

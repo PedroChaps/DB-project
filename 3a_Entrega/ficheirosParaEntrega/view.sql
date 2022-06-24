@@ -7,3 +7,5 @@ FROM evento_reposicao as er, produto as p, instalada_em as ie, ponto_de_retalho 
 WHERE er.ean = p.ean
     AND er.num_serie = ie.num_serie
     AND ie.local_ = pr.nome;
+    
+    
