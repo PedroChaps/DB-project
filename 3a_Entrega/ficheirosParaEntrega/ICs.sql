@@ -1,3 +1,13 @@
+DROP TRIGGER IF EXISTS check_category_not_contains_itself_trigger
+ON tem_outra;
+
+DROP TRIGGER IF EXISTS check_number_units_not_superior_planogram_trigger
+ON evento_reposicao;
+
+DROP TRIGGER IF EXISTS check_product_can_be_replenished_on_shelf_trigger
+ON evento_reposicao;
+
+
 -- (RI-1) Uma Categoria não pode estar contida em si própria --
 
 CREATE OR REPLACE FUNCTION check_category_not_contains_itself_proc() 
