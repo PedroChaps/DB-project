@@ -6,7 +6,8 @@ SELECT v.dia_semana, v.concelho, SUM(v.unidades) AS unidades_totais
 FROM Vendas v
 WHERE make_date(v.ano, v.mes, v.dia_mes) BETWEEN make_date(2020, 07, 09) AND make_date(2022, 08, 14)
 GROUP BY 
-  GROUPING SETS((v.dia_semana), (v.concelho), ());
+  GROUPING SETS((v.dia_semana), (v.concelho), ())
+  ORDER BY v.concelho, v.dia_semana;
   
   
 ----------- 2
